@@ -8,6 +8,7 @@ class Model
 {
     protected $pdo;
 
+    // Create the $table as a global variable, which will be populated on Models
     protected $table;
 
     public function __construct()
@@ -29,12 +30,14 @@ class Model
 
     public function create(array $data)
     {
-        foreach ($data as $key => $value) {
-            $keys[] = $key;
-            $values[] = $value;
-        }
-
+        // Create a new array with only the keys from $data and use it to create
+        // a valid SQL table columns string
+        $keys = array_keys($data);
         $keysString = implode(', ', $keys);
+
+        // Create a new array with only the values form $data, and use it to make
+        // a valid SQL value assign string
+        $values = array_values($data);
         $valuesString = implode("','", $values);
 
         $queryString = "INSERT INTO `{$this->table}` (${keysString}) VALUES ('${valuesString}')";
@@ -55,6 +58,7 @@ class Model
 
     public function update(array $data, string|null $where = null)
     {
+        // Create a array containing a $key='$value' strings
         foreach ($data as $key => $value) {
             $values[] = "${key}='${value}'";
         }
@@ -77,13 +81,10 @@ class Model
         $this->transactionQuery($queryString);
     }
 
-    public function query(string $queryString)
-    {
-        return $this->transactionQuery($queryString);
-    }
-
     private function transactionQuery(string $queryString)
     {
+        // Handle the PDO query in a more safe fashion, preventing bad formed
+        // values from beign inserted on the database
         try {
             $this->pdo->beginTransaction();
 
