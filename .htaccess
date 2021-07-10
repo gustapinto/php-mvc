@@ -1,0 +1,15 @@
+# Create some rules to enable a URL friendly environment
+RewriteEngine on
+
+RewriteBase /
+
+# These rules say that if a File (!-f) or a Directory (!-d) exists they must be
+# accessed, and not the friendly URL
+RewriteCond %{SCRIPT_FILENAME}% !-f
+RewriteCond %{SCRIPT_FILENAME}% !-d
+
+# This rule prevents a URL loop
+RewriteCond %{REQUEST_URI} !^/index\.php
+
+# Pass the entire URL to index.php
+RewriteRule ^(.*)$ index.php?key=$1
