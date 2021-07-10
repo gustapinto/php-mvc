@@ -12,8 +12,11 @@ $action = $separator[2] == null ? 'index' : $separator[2];
 // Converts the controller name to PascalCase, so 'index' -> 'Index'
 $controller = mb_convert_case($controller, MB_CASE_TITLE, 'UTF-8');
 
+// Add the Controller suffix to the desired controller name
+$controller = "${controller}Controller";
+
 // Requires the controller based on the URL
-require_once "app/Controllers/{$controller}Controller.php";
+require_once "app/Controllers/{$controller}.php";
 
 // Instance the user desired Controller and call for the action method
 $app = new $controller();
