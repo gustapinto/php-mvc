@@ -1,6 +1,8 @@
 <?php
 
-require_once '../framework/Controller.php';
+namespace App\Controllers;
+
+use Framework\Controller;
 
 class IndexController extends Controller
 {

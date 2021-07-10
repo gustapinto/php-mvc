@@ -1,5 +1,7 @@
 <?php
 
+namespace Framework;
+
 class Controller
 {
     protected function view(string $view)
