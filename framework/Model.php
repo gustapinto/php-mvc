@@ -42,7 +42,7 @@ class Model
 
         $queryString = "INSERT INTO `{$this->table}` (${keysString}) VALUES ('${valuesString}')";
 
-        $this->transactionQuery($queryString);
+        $this->exec($queryString);
     }
 
     public function read(string|null $where = null)
@@ -51,7 +51,7 @@ class Model
 
         $queryString = "SELECT * FROM `{$this->table}` ${whereString}";
 
-        $results = $this->pdo->query($queryString)->fetchAll();
+        $results = $this->query($queryString)->fetchAll();
 
         return $results;
     }
@@ -69,7 +69,7 @@ class Model
 
         $queryString = "UPDATE `{$this->table}` SET ${valuesString} ${whereString}";
 
-        $this->transactionQuery($queryString);
+        $this->exec($queryString);
     }
 
     public function delete(string|null $where = null)
@@ -78,23 +78,16 @@ class Model
 
         $queryString = "DELETE FROM `{$this->table}` ${whereString}";
 
-        $this->transactionQuery($queryString);
+        $this->exec($queryString);
     }
 
-    private function transactionQuery(string $queryString)
+    public function query(string $queryString)
     {
-        // Handle the PDO query in a more safe fashion, preventing bad formed
-        // values from beign inserted on the database
-        try {
-            $this->pdo->beginTransaction();
+        return $this->pdo->query($queryString);
+    }
 
-            $this->pdo->query($queryString);
-
-            $this->pdo->commit();
-        } catch (PDOException $e) {
-            $this->pdo->rollback();
-
-            throw $e;
-        }
+    public function exec(string $queryString)
+    {
+        return $this->pdo->exec($queryString);
     }
 }
