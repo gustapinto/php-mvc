@@ -4,6 +4,7 @@
 $namespaces = [
     'App\\' => 'app',
     'Framework\\' => 'framework',
+    'Migrations\\' => 'migrations',
 ];
 
 foreach ($namespaces as $namespace => $classpaths) {
