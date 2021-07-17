@@ -9,7 +9,7 @@ class Migrator
     public function __construct()
     {
         // The array_diff removes . and .. entries from scandir result
-        $this->migrations = array_diff(scandir('migrations/'), array('..', '.'));
+        $this->migrations = array_diff(scandir('../migrations/'), array('..', '.'));
     }
 
     public function migrate()

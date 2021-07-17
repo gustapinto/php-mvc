@@ -1,7 +1,7 @@
 <?php
 
 // Autoload all classes, to be independent from index.php calls
-require_once 'autoload.php';
+require_once '../autoload.php';
 
 use Framework\Migrator;
 
