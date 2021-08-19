@@ -12,6 +12,12 @@
 <body>
     <div>
         Index
+
+        <div>
+            <a href="/products">
+                Products
+            </a>
+        </div>
     </div>
 </body>
 </html>
