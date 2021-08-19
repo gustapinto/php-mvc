@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use Framework\Controller;
+use Framework\Helpers\Redirector;
+use App\Models\ProductModel;
 
 class ProductsController extends Controller
 {
@@ -13,6 +15,13 @@ class ProductsController extends Controller
 
     public function new()
     {
-        return $this->view('products.new');
+        $productModel = new ProductModel();
+
+        $productModel->create([
+            'name' => (string) $_POST['name'],
+            'value' => (float) $_POST['value'],
+        ]);
+
+        Redirector::redirect('/products');
     }
 }

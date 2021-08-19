@@ -11,7 +11,18 @@
 </head>
 <body>
     <div>
-        Products
+        <div>
+            Create New Product
+
+            <form method="POST" action="/products/new">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="number" name="value" placeholder="Value" required>
+
+                <button type="submmit">
+                    Save
+                </button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

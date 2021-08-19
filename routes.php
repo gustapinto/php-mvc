@@ -10,6 +10,6 @@ $router = new Router();
 $router->register('', IndexController::class, 'index', 'GET');
 
 $router->register('/products', ProductsController::class, 'index', 'GET');
-$router->register('/products/new', ProductsController::class, 'new', 'GET');
+$router->register('/products/new', ProductsController::class, 'new', 'POST');
 
 $router->run($router->method(), $router->url());
